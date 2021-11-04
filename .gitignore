@@ -1,14 +1,11 @@
-/*
-/*/.config/emacs/*
-/*/.config/*
-
-!/*/.config
-!/*/.config/emacs
-!/*/.config/sway
-!/*/.config/waybar
+*
+!.config
+!.config/emacs
+!.config/sway
+!.config/waybar
 
 
-!/*/.config/emacs/init.el
+!.config/emacs/init.el
 
 !.gitignore
 !.zshrc
