@@ -6,6 +6,10 @@
 
 
 !.config/emacs/init.el
+!.config/emacs/*
+!.config/sway/*
+!.config/waybar/*
+
 
 !.gitignore
 !.zshrc
