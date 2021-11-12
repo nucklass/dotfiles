@@ -237,4 +237,10 @@ bar {
 
 font Atkinson Hyperlegible
 
+#remove title bars
+default_border pixel
+
+#gtk theme stuff
+set $gnome-schema org.gnome.desktop.interface
+
 include /etc/sway/config.d/*
