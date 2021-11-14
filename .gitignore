@@ -4,12 +4,15 @@
 !.config/sway
 !.config/waybar
 
+!.local
+!.local/share
+!.local/share/konsole
+!.local/share/konsole/Dracula.colorscheme
 
 !.config/emacs/init.el
 !.config/emacs/*
 !.config/sway/*
 !.config/waybar/*
-
 
 !.gitignore
 !.zshrc

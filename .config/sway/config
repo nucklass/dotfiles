@@ -111,7 +111,7 @@ exec swayidle -w lock 'swaylock -f -c 000000'
    # brightness 
    bindsym $mod+u exec light -U 5
    bindsym $mod+y exec light -A 5
-
+ 
 # Workspaces:
 #
     # Switch to workspace
@@ -200,6 +200,24 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+mode "mouse" {
+
+     bindsym Up seat - cursor move 0 -10 
+     bindsym Down seat - cursor move 0 10
+     bindsym Left seat - cursor move -10 0
+     bindsym Right seat - cursor move 10 0
+
+     bindsym Return seat - cursor press button1                                     
+     bindsym --release Return seat - cursor release button1  
+
+     bindsym Shift seat - cursor press button2                                     
+     bindsym --release Shift seat - cursor release button2  
+
+     
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+bindsym $mod+z mode "mouse"
 
 include colorscheme
 # Basic color configuration using the Base16 variables for windows and borders.
