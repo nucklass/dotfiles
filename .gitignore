@@ -14,5 +14,7 @@
 !.config/sway/*
 !.config/waybar/*
 
+!.config/konsolerc
+
 !.gitignore
 !.zshrc
