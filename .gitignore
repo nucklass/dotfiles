@@ -10,7 +10,7 @@
 !.local/share/konsole/*
 
 
-!.config/emacs/*
+!.config/emacs/
 !.config/emacs/init.el
 
 !.config/sway/*
