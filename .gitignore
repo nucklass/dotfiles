@@ -9,8 +9,10 @@
 !.local/share/konsole
 !.local/share/konsole/*
 
-!.config/emacs/init.el
+
 !.config/emacs/*
+!.config/emacs/init.el
+
 !.config/sway/*
 !.config/waybar/*
 
