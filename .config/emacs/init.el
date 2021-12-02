@@ -1,3 +1,5 @@
+;; nucklass's sick emacs init file
+
 ;;set up straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -16,7 +18,7 @@
 
 ;; install straight packages
 ;(straight-use-package 'org-mode)
-(mapc 'straight-use-package '(cargo treemacs dired-ranger dired-rainbow dired-filter crux avy minimap aggressive-indent doom-modeline all-the-icons w3m company dashboard multiple-cursors theme-magic spotify dockerfile-mode arduino-mode forth-mode rainbow-delimiters swiper ob-rust drawille csv-mode bluetooth gruvbox-theme dracula-theme scala-mode yaml-mode yaml fsharp-mode 2048-game cobol-mode dark-souls flappymacs hacker-typer isend-mode kaomoji lolcat mbo70s-theme mines moe-theme nyan-mode pacmacs poly-org rainbow-mode rubik roguel-ike rustic rust-mode scad-preview scad-mode sexy-monochrome-theme spacemacs-theme sqlite3 vscode-dark-plus-theme vscode-icon python-mode powerline ob-julia-vterm material-theme julia-mode ess))
+(mapc 'straight-use-package '(cargo treemacs dired-ranger dired-rainbow dired-filter crux avy minimap aggressive-indent doom-modeline all-the-icons w3m company dashboard multiple-cursors theme-magic spotify dockerfile-mode arduino-mode forth-mode rainbow-delimiters swiper ob-rust drawille csv-mode bluetooth gruvbox-theme dracula-theme scala-mode yaml-mode yaml fsharp-mode 2048-game cobol-mode dark-souls flappymacs hacker-typer isend-mode kaomoji lolcat mbo70s-theme mines moe-theme nyan-mode pacmacs poly-org rainbow-mode rubik roguel-ike rustic rust-mode scad-preview scad-mode sexy-monochrome-theme spacemacs-theme sqlite3 vscode-dark-plus-theme vscode-icon python-mode powerline ob-julia-vterm material-theme julia-mode ess vterm-toggle))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -32,8 +34,6 @@
 ;; (unless package-archive-contents
 ;;   (package-refresh-contents))
 ;; (package-install-selected-packages)
-
-
 
 ; make julia-vterm work w/ org mode
 (require 'org)
@@ -123,8 +123,8 @@
 ;set eww as the default browser to open links in emacs 
 ;(I want to see if I can make this w3m)
 (setq browse-url-browser-function 'eww-browse-url)
-
-					;enable aggressive indentation
+					
+;enable aggressive indentation
 ;(global-aggressive-indent-mode 1)
 ;enable avy goto stuff
 (global-set-key (kbd "M-;") 'avy-goto-char)
@@ -132,12 +132,16 @@
 
 ;enable treemacs stuff
 (global-set-key (kbd "M-q") 'treemacs)
-					;startup options
+
+;enable vterm toggle stuff
+(global-set-key (kbd "C-x v") 'vterm-toggle)
+					
+;startup options
 (require 'dashboard)
 (dashboard-setup-startup-hook)
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
-(split-window-vertically)
+(split-window-horizontally)
 ;(deer)
 (other-window 1)
 (vterm)
