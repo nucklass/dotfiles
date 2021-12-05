@@ -13,6 +13,7 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
 ;; Disable package.el in favor of straight.el
 (setq package-enable-at-startup nil)
 
@@ -135,18 +136,23 @@
 
 ;enable vterm toggle stuff
 (global-set-key (kbd "C-x v") 'vterm-toggle)
-					
+
+; vterm setup
+(setq vterm-eval-cmds '(("find-file" find-file-other-window)
+                             ("message" message)
+                             ("vterm-clear-scrollback" vterm-clear-scrollback)))
+
 ;startup options
 (require 'dashboard)
 (dashboard-setup-startup-hook)
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
-(split-window-horizontally)
-;(deer)
-(other-window 1)
-(vterm)
-(rename-buffer "local")
-(other-window 1)
+;; (split-window-horizontally)
+;; ;(deer)
+;; (other-window 1)
+;; (vterm)
+;; (rename-buffer "local")
+;; (other-window 1)
 
 ; terminal specific stuff
 
