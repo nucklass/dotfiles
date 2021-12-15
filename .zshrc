@@ -108,6 +108,10 @@ export EDITOR="/usr/bin/emacs -nw"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export "SASCALL_DEFAULT_CONFIG"="/home/datguy/Documents/SASCal/test/config.toml"
+export "SASCALL_TEST_PROFILE"="/home/datguy/Documents/SASCall/test/config.toml"
+export "JULIA_COPY_STACKS"=1 
+	
 
 if [ "$TERM" = "linux" ]; then
 	printf %b '\e[40m' '\e[8]' # set default background to color 0 'dracula-bg'
