@@ -3,6 +3,7 @@
 !.config/emacs
 !.config/sway
 !.config/waybar
+!.config/wldash
 
 !.local
 !.local/share
@@ -15,7 +16,7 @@
 
 !.config/sway/*
 !.config/waybar/*
-
+!.config/wldash/*
 !.config/konsolerc
 
 !.gitignore

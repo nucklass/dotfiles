@@ -21,7 +21,7 @@ set $term konsole
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-set $menu wldash | xargs swaymsg exec --
+set $menu kickoff | xargs swaymsg exec --
 
 ### Output configuration
 #
