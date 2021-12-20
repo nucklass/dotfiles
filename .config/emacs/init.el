@@ -24,13 +24,12 @@
 (setq straight-use-package-by-default t)
 
 ;;the rest
-(mapc 'straight-use-package '(cargo treemacs dired-ranger dired-rainbow dired-filter crux avy minimap doom-modeline all-the-icons w3m dashboard multiple-cursors spotify dockerfile-mode arduino-mode forth-mode swiper ob-rust drawille csv-mode bluetooth dracula-theme scala-mode yaml-mode yaml fsharp-mode 2048-game cobol-mode dark-souls flappymacs isend-mode kaomoji lolcat mines moe-theme nyan-mode pacmacs poly-org rainbow-mode rubik roguel-ike rustic rust-mode scad-preview scad-mode spacemacs-theme sqlite3 python-mode powerline ob-julia-vterm material-theme julia-mode ess vterm-toggle))
-
+(mapc 'straight-use-package '(cargo treemacs crux avy doom-modeline all-the-icons w3m dashboard multiple-cursors spotify dockerfile-mode arduino-mode forth-mode swiper ob-rust drawille csv-mode dracula-theme scala-mode yaml-mode fsharp-mode cobol-mode flappymacs isend-mode kaomoji lolcat mines moe-theme nyan-mode pacmacs poly-org roguel-ike rustic rust-mode scad-preview scad-mode sqlite3 python-mode ob-julia-vterm  julia-mode ess vterm-toggle))
 ;; switch up dired to dirvish
 (use-package dirvish
   :defer t
-;;  :init
-  ;;(dirvish-override-dired-jump)
+  :init
+(dirvish-override-dired-jump)
   )
 ;; make julia-vterm work w/ org mode
 (use-package org
@@ -59,10 +58,10 @@
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 )
 ;;enable company auto-completion in most programming modes
-(use-package company-mode :hook prog-mode)
-
-;;enable extra features in dired
-(use-package dired-filter :hook dired)
+(use-package company
+  :init
+  (add-hook 'prog-mode-hook #'company-mode)
+)
 
 ;; isend mode customization
 (use-package isend-mode
@@ -95,9 +94,7 @@
 ;;themes
 (load-theme 'dracula t)
 
-;;load custom modeline
-;;(require 'powerline)
-;;(powerline-default-theme)
+;;load custom 
 (add-hook 'after-init-hook #'doom-modeline-mode)
 (add-hook 'after-init-hook #'nyan-mode)
 
@@ -142,19 +139,19 @@
 (global-set-key (kbd "M-q") 'treemacs)
 
 ;;enable vterm toggle stuff
-(global-set-key (kbd "C-c C-v") 'vterm-toggle)
+(global-set-key (kbd "C-c v") 'vterm-toggle)
 
 ;; vterm setup
 (setq vterm-eval-cmds '(("find-file" find-file-other-window)
 			("message" message)
 			("vterm-clear-scrollback" vterm-clear-scrollback)))
 
-;; EDIT DEC15, disable to try ace-window only for window movement
+;;  EDIT DEC15, disable to try ace-window only for window movement
 ;; bind shifted motion keys to wind move, edit for vterm
-;; (eval-after-load 'vterm '(define-key vterm-mode-map (kbd "C-S-p") nil))
-;; (eval-after-load 'vterm '(define-key vterm-mode-map (kbd "C-S-b") nil))
-;; (eval-after-load 'vterm '(define-key vterm-mode-map (kbd "C-S-f") nil))
-;; (eval-after-load 'vterm '(define-key vterm-mode-map (kbd "C-S-n") nil))
+(eval-after-load 'vterm '(define-key vterm-mode-map  (kbd "M-B") nil))
+(eval-after-load 'vterm '(define-key vterm-mode-map  (kbd "M-F") nil))
+(eval-after-load 'vterm '(define-key vterm-mode-map  (kbd "M-P") nil))
+(eval-after-load 'vterm '(define-key vterm-mode-map  (kbd "M-N") nil))
 (global-set-key (kbd "M-B")  #'windmove-left)
 (global-set-key (kbd "M-F") #'windmove-right)
 (global-set-key (kbd "M-P")    #'windmove-up)
