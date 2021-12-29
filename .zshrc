@@ -8,8 +8,8 @@ export ZSH="/home/datguy/.config/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="refined"
-#ZSH_THEME="simonoff"
+#ZSH_THEME="refined"
+ZSH_THEME="simonoff"
 
 
 # Set list of themes to pick from when loading at random
@@ -90,11 +90,11 @@ export EDITOR="/usr/bin/emacs -nw"
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='emacs'
+ else
+   export EDITOR='emacs'
+ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -111,6 +111,9 @@ export EDITOR="/usr/bin/emacs -nw"
 export "SASCALL_DEFAULT_CONFIG"="/home/datguy/Documents/SASCal/test/config.toml"
 export "SASCALL_TEST_PROFILE"="/home/datguy/Documents/SASCall/test/config.toml"
 export "JULIA_COPY_STACKS"=1 
+
+# https://github.com/swaywm/sway/issues/595
+export _JAVA_AWT_WM_NONREPARENTING=1
 	
 
 if [ "$TERM" = "linux" ]; then
