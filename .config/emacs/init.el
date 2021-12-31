@@ -23,7 +23,44 @@
 (setq straight-use-package-by-default t)
 
 ;; the rest
-(mapc 'straight-use-package '(cargo crux avy all-the-icons w3m dashboard multiple-cursors spotify dockerfile-mode arduino-mode forth-mode swiper ob-rust drawille csv-mode scala-mode yaml-mode fsharp-mode cobol-mode flappymacs isend-mode kaomoji lolcat pacmacs poly-org roguel-ike rustic rust-mode scad-preview scad-mode sqlite3 python-mode ob-julia-vterm julia-mode ess vterm-toggle))
+(mapc 'straight-use-package
+      '(cargo
+	crux
+	avy
+	all-the-icons
+	w3m
+	dashboard
+	multiple-cursors
+	spotify
+	dockerfile-mode
+	arduino-mode
+	forth-mode
+	swiper
+	ob-rust
+	drawille
+	csv-mode
+	scala-mode
+	yaml-mode
+	fsharp-mode
+	cobol-mode
+	flappymacs
+	isend-mode
+	kaomoji
+	lolcat
+	pacmacs
+	poly-org
+	roguel-ike
+	rustic
+	rust-mode
+	scad-preview
+	scad-mode
+	sqlite3
+	python-mode
+	ob-julia-vterm
+	julia-mode
+	ess
+	vterm-toggle
+	))
 
 (use-package org
   :defer t
@@ -65,7 +102,6 @@
   :init
   (add-hook 'after-init-hook #'solaire-global-mode))
 
-
 ;;enable rainbow-delimeters in most programming modes
 ;; I should try with use pkg init next, but this works for now
 (use-package rainbow-delimiters
@@ -87,18 +123,6 @@
   (define-key isend-mode-map (kbd "C-c RET") 'isend-send)
   )
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(menu-bar-mode nil)
- ;;'(org-agenda-files '("~/.agenda/main_agenda.org"))
- '(send-mail-function 'smtpmail-send-it)
- '(tooltip-mode nil)
- '(warning-suppress-types '((comp))))
-
 ;;load custom 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
@@ -110,6 +134,64 @@
 )
 (use-package nyan-mode
   :hook (after-init . nyan-mode))
+
+(use-package winum
+  :init (setq winum-keymap
+    (let ((map (make-sparse-keymap)))
+      (define-key map (kbd "C-`") 'winum-select-window-by-number)
+      (define-key map (kbd "C-²") 'winum-select-window-by-number)
+      (define-key map (kbd "M-0") 'winum-select-window-0-or-10)
+      (define-key map (kbd "M-1") 'winum-select-window-1)
+      (define-key map (kbd "M-2") 'winum-select-window-2)
+      (define-key map (kbd "M-3") 'winum-select-window-3)
+      (define-key map (kbd "M-4") 'winum-select-window-4)
+      (define-key map (kbd "M-5") 'winum-select-window-5)
+      (define-key map (kbd "M-6") 'winum-select-window-6)
+      (define-key map (kbd "M-7") 'winum-select-window-7)
+      (define-key map (kbd "M-8") 'winum-select-window-8)
+      map))
+  :hook (after-init . winum-mode)
+  )
+
+;;startup and dashboard options
+(use-package dashboard-ls)
+(use-package dashboard
+  :after (dashboard-ls)
+  :config
+    (setq dashboard-startup-banner '3)
+  ;; Value can be
+  ;; 'official which displays the official emacs logo
+  ;; 'logo which displays an alternative emacs logo
+  ;; 1, 2 or 3 which displays one of the text banners
+  ;; "path/to/your/image.gif", "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever gif/image/text you would prefer
+
+  ;; Content is not centered by default. To center, set
+  (setq dashboard-center-content t)
+  (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
+  ;;(setq dashboard-set-navigator t)
+  (setq dashboard-week-agenda t)
+  (add-to-list 'dashboard-items '(ls-directories . 5) t)
+  (add-to-list 'dashboard-items '(ls-files . 5) t)
+  ;;(add-to-list 'dashboard-items '(agenda) t
+  (dashboard-setup-startup-hook)
+  )
+
+;; global set keys and set some variables outside of use-package's
+
+;;set eww as the default browser to open links in emacs
+;;(I want to see if I can make this w3m)
+(setq browse-url-browser-function 'w3m)
+
+;;enable avy goto stuff
+(global-set-key (kbd "M-;") 'avy-goto-char)
+(global-set-key (kbd "M-\"") 'avy-goto-char-2)
+
+;;enable vterm toggle stuff
+(global-set-key (kbd "C-c v") 'vterm-toggle)
+
+;; bind M-n and M-p to paragraph moveme
+(global-set-key (kbd "M-p") #'backward-paragraph)
+(global-set-key (kbd "M-n") #'forward-paragraph)
 
 ;;change yes/no to y/nx
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -135,66 +217,10 @@
   (other-window 1))
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
-(use-package winum
-  :init (setq winum-keymap
-    (let ((map (make-sparse-keymap)))
-      (define-key map (kbd "C-`") 'winum-select-window-by-number)
-      (define-key map (kbd "C-²") 'winum-select-window-by-number)
-      (define-key map (kbd "M-0") 'winum-select-window-0-or-10)
-      (define-key map (kbd "M-1") 'winum-select-window-1)
-      (define-key map (kbd "M-2") 'winum-select-window-2)
-      (define-key map (kbd "M-3") 'winum-select-window-3)
-      (define-key map (kbd "M-4") 'winum-select-window-4)
-      (define-key map (kbd "M-5") 'winum-select-window-5)
-      (define-key map (kbd "M-6") 'winum-select-window-6)
-      (define-key map (kbd "M-7") 'winum-select-window-7)
-      (define-key map (kbd "M-8") 'winum-select-window-8)
-      map))
-  :hook (after-init . winum-mode)
-  )
-
-;;set eww as the default browser to open links in emacs
-;;(I want to see if I can make this w3m)
-(setq browse-url-browser-function 'w3m)
-
-;;enable avy goto stuff
-(global-set-key (kbd "M-;") 'avy-goto-char)
-(global-set-key (kbd "M-\"") 'avy-goto-char-2)
-
-;;enable vterm toggle stuff
-(global-set-key (kbd "C-c v") 'vterm-toggle)
-
 ;; vterm setup
 (setq vterm-eval-cmds '(("find-file" find-file-other-window)
 			("message" message)
 			("vterm-clear-scrollback" vterm-clear-scrollback)))
-
-;; bind M-n and M-p to paragraph moveme
-(global-set-key (kbd "M-p") #'backward-paragraph)
-(global-set-key (kbd "M-n") #'forward-paragraph)
-
-;;startup and dashboard options
-(use-package dashboard-ls)
-(use-package dashboard
-  :after (dashboard-ls)
-  :config
-    (setq dashboard-startup-banner '3)
-  ;; Value can be
-  ;; 'official which displays the official emacs logo
-  ;; 'logo which displays an alternative emacs logo
-  ;; 1, 2 or 3 which displays one of the text banners
-  ;; "path/to/your/image.gif", "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever gif/image/text you would prefer
-
-  ;; Content is not centered by default. To center, set
-  (setq dashboard-center-content t)
-  (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
-  ;;(setq dashboard-set-navigator t)
-  (setq dashboard-week-agenda t)
-  (add-to-list 'dashboard-items '(ls-directories . 5) t)
-  (add-to-list 'dashboard-items '(ls-files . 5) t)
-  ;;(add-to-list 'dashboard-items '(agenda) t
-  (dashboard-setup-startup-hook)
-  )
 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
@@ -203,3 +229,15 @@
 
 (add-hook 'prog-mode-hook  #'display-line-numbers-mode)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(menu-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
