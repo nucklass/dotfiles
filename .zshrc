@@ -63,7 +63,7 @@ say() {
 
 alias ls='ls --color=auto'
 
-if [ -e /usr/bin/starship ]
+if [ -x "$(command -v foo)" ]
 then
    eval "$(starship init zsh)"
 else
