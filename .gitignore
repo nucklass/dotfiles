@@ -13,7 +13,7 @@
 
 !.config/emacs/
 !.config/emacs/init.el
-!.config/starship.el
+!.config/starship.toml
 
 !.config/sway/*
 !.config/waybar/*
