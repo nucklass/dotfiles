@@ -4,7 +4,7 @@
 !.config/sway
 !.config/waybar
 !.config/wldash
-!,config/nu
+!.config/nu
 
 !.local
 !.local/share
