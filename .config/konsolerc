@@ -6,6 +6,9 @@ eDP-1 Window-Maximized 1920x1080=true
 [Desktop Entry]
 DefaultProfile=Nick.profile
 
+[General]
+CommandBarLastUsedActions=
+
 [KonsoleWindow]
 ShowMenuBarByDefault=false
 
@@ -21,3 +24,6 @@ eDP-1 Window-Maximized 1920x1080=true
 [PrintOptions]
 PrinterFriendly=true
 ScaleOutput=true
+
+[UiSettings]
+ColorScheme=Default

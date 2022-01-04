@@ -62,6 +62,14 @@
 	vterm-toggle
 	))
 
+(use-package erc
+  :defer t
+  :init
+  (global-set-key (kbd "C-c e b")
+		  (lambda () (interactive)
+		    (erc :server "localhost" :port "6667" :nick "nucklass")))
+)
+
 (use-package org
   :defer t
   :config
@@ -80,6 +88,10 @@
   ;; overwrite default submit kebinding to work on terminal mode
   (define-key julia-vterm-mode-map (kbd "C-c RET") 'julia-vterm-send-region-or-current-line)
   )
+
+(use-package vterm
+  :defer t
+  :config (setq cursor-type 'bar))
 
 (use-package treemacs :defer t)
 (global-set-key (kbd "M-q") 'treemacs)
@@ -226,6 +238,7 @@
 (setq initial-scratch-message nil)
 (setq initial-major-mode 'fundamental-mode)
 (setq shift-select-mode nil)
+(setq-default cursor-type 'bar) 
 
 (add-hook 'prog-mode-hook  #'display-line-numbers-mode)
 
@@ -234,7 +247,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(menu-bar-mode nil))
+ '(menu-bar-mode nil)
+ '(send-mail-function 'smtpmail-send-it)
+ '(smtpmail-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 587))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

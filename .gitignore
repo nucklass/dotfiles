@@ -4,6 +4,7 @@
 !.config/sway
 !.config/waybar
 !.config/wldash
+!,config/nu
 
 !.local
 !.local/share
@@ -19,6 +20,7 @@
 !.config/waybar/*
 !.config/wldash/*
 !.config/konsolerc
+!.config/nu/*
 
 !.gitignore
 !.zshrc

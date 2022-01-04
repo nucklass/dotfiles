@@ -65,7 +65,8 @@ alias ls='ls --color=auto'
 
 if [ -x "$(command -v starship)" ]
 then
-   eval "$(starship init zsh)"
+    eval "$(starship init zsh)"
+    #echo "starship should run in this case"
 else
    sh -c "$(curl -fsSL https://starship.rs/install.sh)"
    eval "$(starship init zsh)"
