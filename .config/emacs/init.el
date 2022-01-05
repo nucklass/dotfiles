@@ -45,6 +45,7 @@
 	cobol-mode
 	flappymacs
 	isend-mode
+	emojify
 	kaomoji
 	lolcat
 	pacmacs
@@ -166,11 +167,11 @@
   )
 
 ;;startup and dashboard options
-(use-package dashboard-ls)
+;;(use-package dashboard-ls)
 (use-package dashboard
-  :after (dashboard-ls)
+ ;;:after (dashboard-ls)
   :config
-    (setq dashboard-startup-banner '3)
+    (setq dashboard-startup-banner '4)
   ;; Value can be
   ;; 'official which displays the official emacs logo
   ;; 'logo which displays an alternative emacs logo
