@@ -1,5 +1,4 @@
 ;; nucklass's sick emacs init file
-
 ;;set up straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -61,6 +60,7 @@
 	julia-mode
 	ess
 	vterm-toggle
+	circe
 	))
 
 (use-package erc
@@ -169,7 +169,7 @@
 ;;startup and dashboard options
 ;;(use-package dashboard-ls)
 (use-package dashboard
- ;;:after (dashboard-ls)
+  ;;:after (dashboard-ls)
   :config
     (setq dashboard-startup-banner '4)
   ;; Value can be
@@ -183,8 +183,8 @@
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
   ;;(setq dashboard-set-navigator t)
   (setq dashboard-week-agenda t)
-  (add-to-list 'dashboard-items '(ls-directories . 5) t)
-  (add-to-list 'dashboard-items '(ls-files . 5) t)
+  ;;(add-to-list 'dashboard-items '(ls-directories . 5) t)
+  ;;(add-to-list 'dashboard-items '(ls-files . 5) t)
   ;;(add-to-list 'dashboard-items '(agenda) t
   (dashboard-setup-startup-hook)
   )
@@ -251,10 +251,8 @@
  '(menu-bar-mode nil)
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp.gmail.com")
- '(smtpmail-smtp-service 587))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+ '(smtpmail-smtp-service 587)
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil)
+ '(warning-suppress-log-types '((comp) (comp)))
+ '(warning-suppress-types '((comp))))
