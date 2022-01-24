@@ -14,7 +14,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term konsole
+#set $term foot
+set $term ELM_DISPLAY=wl terminology
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -277,5 +278,7 @@ set $gnome-schema org.gnome.desktop.interface
 
 #uncomment to disable xwayland things
 #xwayland disable
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 include /etc/sway/config.d/*

@@ -5,6 +5,8 @@
 !.config/waybar
 !.config/wldash
 !.config/nu
+!.config/nyxt
+!.config/terminology
 
 !.local
 !.local/share
@@ -21,6 +23,8 @@
 !.config/wldash/*
 !.config/konsolerc
 !.config/nu/*
+!.config/nyxt/*
+!.config/terminology/*
 
 !.gitignore
 !.zshrc

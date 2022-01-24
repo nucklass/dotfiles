@@ -60,8 +60,44 @@
 	julia-mode
 	ess
 	vterm-toggle
-	circe
+	typescript-mode
+	posframe
+	stan-mode
 	))
+
+(use-package polymode
+  :ensure t
+  :defer t
+  ;; :mode ("\.jl$" . poly-jl-stan-mod)
+  :config
+  (setq polymode-prefix-key (kbd "C-c n"))
+  (define-hostmode poly-julia-hostmode :mode 'julia-mode)
+  (define-innermode poly-stan-expr-julia-innermode
+  :mode 'stan-mode
+  :head-matcher (rx (= 3 (char "\"'")) "//stan"  (* (any space)))
+  :tail-matcher (rx (= 3 (char "\"'")))
+  :head-mode 'host
+  :tail-mode 'host
+  )
+    (define-polymode poly-julia-stan-mode
+    :hostmode 'poly-julia-hostmode
+    :innermodes '(poly-stan-expr-julia-innermode)
+   ;; (setq polymode-eval-region-function #'poly-python-sql-eval-chunk)
+    ;; (define-key poly-python-sql-mode-map (kbd "C-c C-c") 'polymode-eval-chunk)
+    )
+  )
+(use-package go-translate
+  :defer t
+  :config
+  (setq gts-translate-list '(("ja" "en")))
+
+  (setq gts-default-translator
+      (gts-translator
+       :picker (gts-prompt-picker :texter (gts-current-or-selection-texter) :single t)
+       :engines (list (gts-bing-engine) (gts-google-engine))
+       :render (gts-buffer-render)))
+)
+
 
 (use-package erc
   :defer t
@@ -74,7 +110,7 @@
 (use-package org
   :defer t
   :config
-  (add-to-list 'org-babel-load-languages '(julia-vterm . t))
+  (add-to-list 'org-babel-load-languages '(juliaOB-vterm . t))
   ;;(add-to-list 'org-babel-load-languages '(python . t))
   ;;(add-to-list 'org-babel-load-languages '(R . t))
   ;;(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
@@ -88,14 +124,22 @@
   :config
   ;; overwrite default submit kebinding to work on terminal mode
   (define-key julia-vterm-mode-map (kbd "C-c RET") 'julia-vterm-send-region-or-current-line)
+  ()2
   )
 
 (use-package vterm
   :defer t
   :config (setq cursor-type 'bar))
 
-(use-package treemacs :defer t)
-(global-set-key (kbd "M-q") 'treemacs)
+(use-package treemacs
+  :defer t
+  :init
+    (with-eval-after-load 'winum
+      (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window))
+)
 
 ;;themes
 (use-package doom-themes
@@ -104,8 +148,8 @@
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; for treemacs users
-  ;;(setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  ;;(doom-themes-treemacs-config)
+  (setq doom-themes-treemacs-theme "doom-colors") ; use "doom-atom" for a more minimal icon theme
+  (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   ;;(doom-themes-org-config)
  )
