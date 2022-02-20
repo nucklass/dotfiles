@@ -74,7 +74,9 @@ exec swayidle -w lock 'swaylock -f -c 000000'
     bindsym $mod+d exec $menu
 
     #start emacs
-    bindsym $mod+e exec konsole -e emacs
+    bindsym $mod+Shift+Return exec emacs -fn JuliaMono:12 -e "vterm"
+    bindsym $mod+e exec emacs -fn JuliaMono:12
+    bindsym $mod+g exec emacs -fn JuliaMono:12 -e "dirvish"
     
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -118,7 +120,8 @@ exec swayidle -w lock 'swaylock -f -c 000000'
    # rebind caps lock
    
    input 1:1:AT_Translated_Set_2_keyboard {
-    xkb_options caps:ctrl_modifier
+    #xkb_options caps:ctrl_modifier
+    xkb_options "ctrl:nocaps,ctrl:swapcaps"
 }
 
 # Workspaces:

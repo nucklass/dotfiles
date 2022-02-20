@@ -72,3 +72,4 @@ else
    eval "$(starship init zsh)"
 fi
 
+eval "$(pyenv init -)"

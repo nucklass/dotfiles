@@ -1,68 +1,114 @@
-filesize_format = "B" # can be b, kb, kib, mb, mib, gb, gib, etc
-skip_welcome_message = true
 disable_table_indexes = false
+filesize_format = "B"
 nonzero_exit_errors = true
-startup = [
- "mkdir ~/.cache/starship",
- "starship init nu | save ~/.cache/starship/init.nu",
- "source ~/.cache/starship/init.nu",			
- ""
-]
+path = ["/home/datguy/.pyenv/shims", "/home/datguy/.pyenv/bin", "/home/datguy/.cargo/bin", "/home/datguy/.local/bin", "/home/datguy/.config/guix/current/bin", "/usr/local/sbin", "/usr/local/bin", "/usr/bin", "/home/datguy/.dotnet/tools", "/usr/lib/jvm/default/bin", "/usr/bin/site_perl", "/usr/bin/vendor_perl", "/usr/bin/core_perl", "/var/lib/snapd/snap/bin"]
 prompt = "starship_prompt"
+skip_welcome_message = true
+startup = ["mkdir ~/.cache/starship", "starship init nu | save ~/.cache/starship/init.nu", "source ~/.cache/starship/init.nu", "source ~/.config/nu/emacs.nu"]
 table_mode = "light"
 
-[env]
-SASCALL_DEFAULT_CONFIG="/home/datguy/Documents/SASCal/test/config.toml"
-SASCALL_TEST_PROFILE="/home/datguy/Documents/SASCall/test/config.toml"
-JULIA_COPY_STACKS=1 
-_JAVA_AWT_WM_NONREPARENTING=1 # https://github.com/swaywm/sway/issues/595
-
 [color_config]
-primitive_int = "green"
-primitive_decimal = "red"
-primitive_filesize = "ur"
-primitive_string = "pb"
-primitive_line = "yellow"
-primitive_columnpath = "cyan"
-primitive_pattern = "white"
-primitive_boolean = "green"
-primitive_date = "ru"
-primitive_duration = "blue"
-primitive_range = "purple"
-primitive_path = "yellow"
-primitive_binary = "cyan"
-separator_color = "purple"
-header_align = "l" # left|l, right|r, center|c
-header_color = "c" # green|g, red|r, blue|u, black|b, yellow|y, purple|p, cyan|c, white|w
+header_align = "l"
+header_color = "c"
 index_color = "rd"
 leading_trailing_space_bg = "white"
+primitive_binary = "cyan"
+primitive_boolean = "green"
+primitive_columnpath = "cyan"
+primitive_date = "ru"
+primitive_decimal = "red"
+primitive_duration = "blue"
+primitive_filesize = "ur"
+primitive_int = "green"
+primitive_line = "yellow"
+primitive_path = "yellow"
+primitive_pattern = "white"
+primitive_range = "purple"
+primitive_string = "pb"
+separator_color = "purple"
+
+[env]
+CMD_DURATION_MS = "10"
+DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/1000/bus"
+DISPLAY = ":0"
+DOTNET_BUNDLE_EXTRACT_BASE_DIR = "/home/datguy/.cache/dotnet_bundle_extract"
+DOTNET_ROOT = "/usr/share/dotnet"
+DRI_PRIME = "1"
+EDITOR = "/usr/bin/emacs -nw"
+ELM_DISPLAY = "wl"
+GRADLE_HOME = "/usr/share/java/gradle"
+GREETD_SOCK = "/run/greetd-569.sock"
+GUIX_LOCPATH = "/home/datguy/.guix-profile/lib/locale"
+GUIX_PROFILE = "/home/datguy/.guix-profile"
+HOME = "/home/datguy"
+I3SOCK = "/run/user/1000/sway-ipc.1000.1620.sock"
+LANG = "en_US.UTF-8"
+LC_ADDRESS = "en_US.UTF-8"
+LC_IDENTIFICATION = "en_US.UTF-8"
+LC_MEASUREMENT = "en_US.UTF-8"
+LC_MONETARY = "en_US.UTF-8"
+LC_NAME = "en_US.UTF-8"
+LC_NUMERIC = "en_US.UTF-8"
+LC_PAPER = "en_US.UTF-8"
+LC_TELEPHONE = "en_US.UTF-8"
+LC_TIME = "en_US.UTF-8"
+LOGNAME = "datguy"
+MAIL = "/var/spool/mail/datguy"
+MKLROOT = "/opt/intel/mkl"
+MOTD_SHOWN = "pam"
+MOZ_PLUGIN_PATH = "/usr/lib/mozilla/plugins"
+PWD = "/home/datguy"
+PYTHIA8 = "/usr"
+PYTHIA8DATA = "/usr/share/pythia8/xmldoc"
+SASCALL_DEFAULT_CONFIG = "/home/datguy/Documents/SASCal/test/config.toml"
+SASCALL_TEST_PROFILE = "/home/datguy/Documents/SASCall/test/config.toml"
+SHELL = "/usr/bin/nu"
+SHLVL = "0"
+SPARK_HOME = "/opt/apache-spark"
+STARSHIP_SESSION_KEY = "FiuHxTnOchQGv9JA"
+STARSHIP_SHELL = "nu"
+SWAYSOCK = "/run/user/1000/sway-ipc.1000.1620.sock"
+TERM = "xterm-256color"
+TERMINOLOGY = "1"
+TERM_PROGRAM = "terminology"
+TERM_PROGRAM_VERSION = "1.11.0"
+USER = "datguy"
+WAYLAND_DISPLAY = "wayland-1"
+WINDOWID = "94373903327792"
+XCURSOR_SIZE = "24"
+XDG_DATA_DIRS = "/home/datguy/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+XDG_RUNTIME_DIR = "/run/user/1000"
+XDG_SEAT = "seat0"
+XDG_SESSION_CLASS = "user"
+XDG_SESSION_ID = "3"
+XDG_SESSION_TYPE = "wayland"
+XDG_VTNR = "1"
+XTERM_256_COLORS = "1"
+_ = "/usr/bin/terminology"
+_JAVA_AWT_WM_NONREPARENTING = 1
 
 [line_editor]
-max_history_size = 100000
-history_duplicates = "ignoreconsecutive" # alwaysadd,ignoreconsecutive
-history_ignore_space = false
-completion_type = "circular" # circular, list, fuzzy
-completion_prompt_limit = 100
-keyseq_timeout_ms = 500 # ms
-edit_mode = "emacs" # vi, emacs
 auto_add_history = true
-bell_style = "visable" # audible, none, visible
-color_mode = "forced" # enabled, forced, disabled
+bell_style = "visable"
+color_mode = "forced"
+completion_prompt_limit = 100
+completion_type = "circular"
+edit_mode = "emacs"
+history_duplicates = "ignoreconsecutive"
+history_ignore_space = false
+keyseq_timeout_ms = 500
+max_history_size = 100000
 tab_stop = 4
 
 [textview]
-term_width = "default" # "default" or a number
-tab_width = 4
 colored_output = true
-true_color = true
+grid = true
 header = true
 line_numbers = true
-grid = true
-vcs_modification_markers = true
 snip = true
-#wrapping_mode = "NoWrapping" # Character, NoWrapping
-use_italics = true
-#paging_mode = "QuitIfOneScreen" # Always, QuitIfOneScreen, Never
+tab_width = 4
+term_width = "default"
 theme = "Dracula"
-
-
+true_color = true
+use_italics = true
+vcs_modification_markers = true

@@ -7,6 +7,9 @@
 !.config/nu
 !.config/nyxt
 !.config/terminology
+!.config/terminology/background
+!.config/terminology/config
+!.config/terminology/themes
 
 !.local
 !.local/share
@@ -24,7 +27,10 @@
 !.config/konsolerc
 !.config/nu/*
 !.config/nyxt/*
-!.config/terminology/*
+!.config/terminology/background/*
+!.config/terminology/config/*
+!.config/terminology/themes/*
+
 
 !.gitignore
 !.zshrc

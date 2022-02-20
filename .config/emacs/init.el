@@ -1,5 +1,17 @@
 ;; nucklass's sick emacs init file
+;; supress gc on startup
+
+(setq gc-cons-threshold 5000000) ;; can increase this threshold to reduce startup time
+
+(add-hook 'emacs-startup-hook 'my/set-gc-threshold)
+(defun my/set-gc-threshold ()
+  "Reset `gc-cons-threshold' to its default value."
+  (setq gc-cons-threshold 800000))
+
 ;;set up straight.el
+
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -27,10 +39,8 @@
 	crux
 	avy
 	all-the-icons
-	w3m
 	dashboard
 	multiple-cursors
-	spotify
 	dockerfile-mode
 	arduino-mode
 	forth-mode
@@ -41,16 +51,12 @@
 	scala-mode
 	yaml-mode
 	fsharp-mode
-	cobol-mode
-	flappymacs
 	isend-mode
 	emojify
 	kaomoji
 	lolcat
-	pacmacs
 	poly-org
 	roguel-ike
-	rustic
 	rust-mode
 	scad-preview
 	scad-mode
@@ -64,6 +70,13 @@
 	posframe
 	stan-mode
 	))
+
+(use-package sly)
+
+(use-package dirvish
+  :config
+  (dirvish-override-dired-mode)
+  )
 
 (use-package polymode
   :ensure t
@@ -85,7 +98,14 @@
    ;; (setq polymode-eval-region-function #'poly-python-sql-eval-chunk)
     ;; (define-key poly-python-sql-mode-map (kbd "C-c C-c") 'polymode-eval-chunk)
     )
-  )
+    )
+
+(use-package cobol-mode
+  :defer t
+  :config
+  (setq cobol-source-format 'free)
+ )
+
 (use-package go-translate
   :defer t
   :config
@@ -110,10 +130,11 @@
 (use-package org
   :defer t
   :config
-  (add-to-list 'org-babel-load-languages '(juliaOB-vterm . t))
+  (setq org-startup-indented t)
+  (add-to-list 'org-babel-load-languages '(julia-ob-vterm . t))
   ;;(add-to-list 'org-babel-load-languages '(python . t))
   ;;(add-to-list 'org-babel-load-languages '(R . t))
-  ;;(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+  ;;(orgp-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
   (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
   )
 
@@ -180,7 +201,20 @@
   (define-key isend-mode-map (kbd "C-c RET") 'isend-send)
   )
 
-;;load custom 
+;; eval in repl for ielm stuff
+(use-package eval-in-repl
+  :defer t
+  :config
+  (setq eir-repl-placement 'right)
+  ;;; ielm support (for emacs lisp)
+  (require 'eval-in-repl-ielm)
+  ;; Evaluate expression in the current buffer.
+  (setq eir-ielm-eval-in-current-buffer t)
+  ;; for .el files
+  (define-key emacs-lisp-mode-map (kbd "<C-return>") 'eir-eval-in-ielm)
+  ;; for *scratch*
+  )
+
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :config
@@ -188,7 +222,8 @@
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-unicode-fallback nil)
   (setq doom-modeline-irc t)
-)
+  )
+
 (use-package nyan-mode
   :hook (after-init . nyan-mode))
 
@@ -237,7 +272,7 @@
 
 ;;set eww as the default browser to open links in emacs
 ;;(I want to see if I can make this w3m)
-(setq browse-url-browser-function 'w3m)
+(setq browse-url-browser-function 'eww)
 
 ;;enable avy goto stuff
 (global-set-key (kbd "M-;") 'avy-goto-char)
