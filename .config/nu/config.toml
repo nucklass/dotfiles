@@ -52,6 +52,7 @@ LC_NUMERIC = "en_US.UTF-8"
 LC_PAPER = "en_US.UTF-8"
 LC_TELEPHONE = "en_US.UTF-8"
 LC_TIME = "en_US.UTF-8"
+LD_LIBRARY_PATH = "/home/datguy/.julia/juliaup/julia-1.8.0-beta1+0~x64/lib" 
 LOGNAME = "datguy"
 MAIL = "/var/spool/mail/datguy"
 MKLROOT = "/opt/intel/mkl"
@@ -86,6 +87,7 @@ XDG_VTNR = "1"
 XTERM_256_COLORS = "1"
 _ = "/usr/bin/terminology"
 _JAVA_AWT_WM_NONREPARENTING = 1
+JULIA_DIR = "/home/datguy/.julia/juliaup/julia-1.8.0-beta1+0~x64"
 
 [line_editor]
 auto_add_history = true

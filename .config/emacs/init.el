@@ -318,7 +318,7 @@
 (setq initial-scratch-message nil)
 (setq initial-major-mode 'fundamental-mode)
 (setq shift-select-mode nil)
-(setq-default cursor-type 'bar) 
+(setq-default cursor-type 'box) 
 
 (add-hook 'prog-mode-hook  #'display-line-numbers-mode)
 
