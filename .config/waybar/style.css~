@@ -1,4 +1,4 @@
-@import "/etc/xdg/waybar/scheme.css";
+@import "/home/datguy/.config/waybar/scheme.css";
 
 * {
     border: none;
@@ -112,8 +112,8 @@ window#waybar.chromium {
 }
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: #000000;
+    background-color: @base08;
 }
 
 @keyframes blink {
@@ -147,7 +147,7 @@ label:focus {
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: @base02;
 }
 
 #backlight {
@@ -189,7 +189,8 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: @base0C;
+    color: #000000;
 }
 
 #temperature.critical {

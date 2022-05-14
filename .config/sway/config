@@ -1,4 +1,4 @@
- # Default config for sway
+	 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
@@ -14,8 +14,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-#set $term foot
-set $term ELM_DISPLAY=wl terminology
+set $term foot
+#set $term ELM_DISPLAY=wl terminology
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -25,7 +25,10 @@ set $term ELM_DISPLAY=wl terminology
 set $menu wldash | xargs swaymsg exec --
 
 ### Output configuration
-#
+
+#Default cursor theme
+seat seat0 xcursor_theme Dracula-cursors 72
+
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg ./manjaro.png fill
 #

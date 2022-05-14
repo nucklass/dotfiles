@@ -36,6 +36,7 @@
 ;; the rest
 (mapc 'straight-use-package
       '(cargo
+	counsel
 	crux
 	avy
 	all-the-icons
@@ -71,11 +72,27 @@
 	stan-mode
 	))
 
+;; (use-package display-wttr
+;;   :config
+;;   (display-wttr-mode))
+
+(use-package vterm
+  :config (setq vterm-shell "nu"))
+
 (use-package sly)
 
 (use-package dirvish
+  :init
+  (with-eval-after-load 'winum
+  (define-key winum-keymap (kbd "M-0") #'dirvish-side))
+
   :config
   (dirvish-override-dired-mode)
+    :bind
+  (nil ; Bind `dirvish|dirvish-dired|dirvish-side|dirvish-dwim' as you see fit
+   :map dired-mode-map
+   ("M-0" . dirvish-side)
+   )
   )
 
 (use-package polymode
@@ -118,7 +135,6 @@
        :render (gts-buffer-render)))
 )
 
-
 (use-package erc
   :defer t
   :init
@@ -138,29 +154,46 @@
   (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
   )
 
-(use-package julia-vterm
-  :defer t
-  :init
-  (add-hook 'julia-mode-hook #'julia-vterm-mode)
-  :config
-  ;; overwrite default submit kebinding to work on terminal mode
-  (define-key julia-vterm-mode-map (kbd "C-c RET") 'julia-vterm-send-region-or-current-line)
-  ()2
-  )
-
 (use-package vterm
   :defer t
   :config (setq cursor-type 'bar))
 
-(use-package treemacs
-  :defer t
-  :init
-    (with-eval-after-load 'winum
-      (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  :bind
-  (:map global-map
-        ("M-0"       . treemacs-select-window))
-)
+(use-package julia-snail
+  :ensure t
+  :hook (julia-mode . julia-snail-mode))
+
+;; (use-package julia-vterm
+;;   :defer t
+;;   :init
+;;   (add-hook 'julia-mode-hook #'julia-vterm-mode)
+;;   :config
+;;   ;; overwrite default submit kebinding to work on terminal mode
+;;   (define-key julia-vterm-mode-map (kbd "C-c RET") 'julia-vterm-send-region-or-current-line)
+;;   ()
+;;   )
+
+
+;; (use-package dired-sidebar
+;;   :defer t
+;;   :init
+;;      (with-eval-after-load 'winum
+;;        (define-key winum-keymap (kbd "M-0") #'dired-sidebar-toggle-sidebar))
+;;   :bind
+;;   (:map global-map
+;;         ("M-0"       . dired-sidebar-toggle-sidebar))
+;;   :config
+;;   (setq dired-sidebar-theme 'ascii)
+;; )
+
+;; (use-package treemacs
+;;   :defer t
+;;   :init
+;;     (with-eval-after-load 'winum
+;;       (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+;;   :bind
+;;   (:map global-map
+;;         ("M-0"       . treemacs-select-window))
+;; )
 
 ;;themes
 (use-package doom-themes
@@ -181,12 +214,12 @@
   (add-hook 'after-init-hook #'solaire-global-mode))
 
 ;;enable rainbow-delimeters in most programming modes
-;; I should try with use pkg init next, but this works for now
 (use-package rainbow-delimiters
   :defer t
   :init   
  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-)
+ )
+
 ;;enable company auto-completion in most programming modes
 (use-package company
   :defer t
