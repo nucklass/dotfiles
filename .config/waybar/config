@@ -148,7 +148,7 @@
     },
     "custom/weather": {
         "format": "{}",
-    	"exec": "curl 'wttr.in/Palo+Alto?format=3'",
+    	"exec": "curl 'wttr.in/?format=3'",
 	"interval": 3600	
     },
     "wlr/taskbar": {

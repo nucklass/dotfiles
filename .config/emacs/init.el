@@ -2,6 +2,7 @@
 ;; supress gc on startup
 
 (setq gc-cons-threshold 5000000) ;; can increase this threshold to reduce startup time
+(setq max-specpdl-size 13000)
 
 (add-hook 'emacs-startup-hook 'my/set-gc-threshold)
 (defun my/set-gc-threshold ()
@@ -38,6 +39,7 @@
       '(cargo
 	counsel
 	crux
+	ess
 	avy
 	all-the-icons
 	dashboard
@@ -45,7 +47,7 @@
 	dockerfile-mode
 	arduino-mode
 	forth-mode
-	swiper
+	;;swiper
 	ob-rust
 	drawille
 	csv-mode
@@ -56,30 +58,49 @@
 	emojify
 	kaomoji
 	lolcat
-	poly-org
+	slime
+	;;poly-org
 	roguel-ike
 	rust-mode
 	scad-preview
 	scad-mode
 	sqlite3
-	python-mode
-	ob-julia-vterm
+	;;ob-julia-vterm
 	julia-mode
 	ess
-	vterm-toggle
+	python-mode
+	;;vterm-toggle
+	multi-vterm
 	typescript-mode
-	posframe
+	;;posframe
 	stan-mode
+	;;jupyter
 	))
 
-;; (use-package display-wttr
-;;   :config
-;;   (display-wttr-mode))
+;;idk whats up w/ org mode but i have to set configs outside of use-package :/
+(setq org-startup-indented t)
+(org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (python . t) (julia . t)))
+
+(use-package whitespace
+  :hook python-mode)
+
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable)
+  :config
+  (setq python-shell-interpreter "jupyter"
+      python-shell-interpreter-args "console"
+      python-shell-prompt-detect-failure-warning nil)
+(add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+  )
+
+(use-package ace-popup-menu
+  :config (ace-popup-menu-mode 1))
 
 (use-package vterm
   :config (setq vterm-shell "nu"))
 
-(use-package sly)
 
 (use-package dirvish
   :init
@@ -88,6 +109,7 @@
 
   :config
   (dirvish-override-dired-mode)
+  ;;(dirvish-side-follow-mode)
     :bind
   (nil ; Bind `dirvish|dirvish-dired|dirvish-side|dirvish-dwim' as you see fit
    :map dired-mode-map
@@ -143,16 +165,20 @@
 		    (erc :server "localhost" :port "6667" :nick "nucklass")))
 )
 
-(use-package org
-  :defer t
-  :config
-  (setq org-startup-indented t)
-  (add-to-list 'org-babel-load-languages '(julia-ob-vterm . t))
-  ;;(add-to-list 'org-babel-load-languages '(python . t))
-  ;;(add-to-list 'org-babel-load-languages '(R . t))
-  ;;(orgp-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-  (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
-  )
+ (use-package org-bullets
+    :defer t
+   :hook (org-mode . (lambda () (org-bullets-mode 1))))
+
+;; (use-package org
+;;    :defer t
+;;    :config
+;;    (setq org-startup-indented t)
+;;    (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (python . t) (julia-ob-vterm))
+;;    ;;(add-to-list 'org-babel-load-languages '(julia-ob-vterm . t))
+;; ;;   ;;(add-to-list 'org-babel-load-languages '(R . t))
+;; ;;   ;;(orgp-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+;; ;;   ;;(defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
+;;    ))
 
 (use-package vterm
   :defer t
@@ -172,28 +198,6 @@
 ;;   ()
 ;;   )
 
-
-;; (use-package dired-sidebar
-;;   :defer t
-;;   :init
-;;      (with-eval-after-load 'winum
-;;        (define-key winum-keymap (kbd "M-0") #'dired-sidebar-toggle-sidebar))
-;;   :bind
-;;   (:map global-map
-;;         ("M-0"       . dired-sidebar-toggle-sidebar))
-;;   :config
-;;   (setq dired-sidebar-theme 'ascii)
-;; )
-
-;; (use-package treemacs
-;;   :defer t
-;;   :init
-;;     (with-eval-after-load 'winum
-;;       (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-;;   :bind
-;;   (:map global-map
-;;         ("M-0"       . treemacs-select-window))
-;; )
 
 ;;themes
 (use-package doom-themes
@@ -228,11 +232,11 @@
 )
 
 ;; isend mode customization
-(use-package isend-mode
-  :defer t
-  :config
-  (define-key isend-mode-map (kbd "C-c RET") 'isend-send)
-  )
+;; (use-package isend-mode
+;;   :defer t
+;;   :config
+;;   (define-key isend-mode-map (kbd "C-c RET") 'isend-send)
+;;   )
 
 ;; eval in repl for ielm stuff
 (use-package eval-in-repl
@@ -283,13 +287,14 @@
 (use-package dashboard
   ;;:after (dashboard-ls)
   :config
-    (setq dashboard-startup-banner '4)
+    (setq dashboard-startup-banner "~/.config/emacs/title.txt")
   ;; Value can be
   ;; 'official which displays the official emacs logo
   ;; 'logo which displays an alternative emacs logo
   ;; 1, 2 or 3 which displays one of the text banners
   ;; "path/to/your/image.gif", "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever gif/image/text you would prefer
 
+  (setq dashboard-set-navigator t)
   ;; Content is not centered by default. To center, set
   (setq dashboard-center-content t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
@@ -301,18 +306,43 @@
   (dashboard-setup-startup-hook)
   )
 
+;; stole this from online lol https://github.com/Atman50/emacs-config#org1fb3f72
+(use-package ivy
+  :diminish ""
+  :bind (:map ivy-minibuffer-map
+              ("C-w" . ivy-yank-word) ;; make work like isearch
+              ("C-r" . ivy-previous-line))
+   :config
+  (ivy-mode 1)
+   (setq ivy-initial-inputs-alist nil) ;; no regexp by default
+   (setq ivy-re-builders-alist         ;; allow input not in order
+         '((t . ivy--regex-ignore-order)))
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-mode t)
+  (ivy-use-selectable-prompt t)
+  (ivy-use-virtual-buffers t))
+ (use-package swiper
+   :bind (("C-S-s" . isearch-forward)  ;; Keep isearch-forward on Shift-Ctrl-s
+          ("C-s" . swiper)             ;; Use swiper for search and reverse search
+         ("C-S-r" . isearch-backward) ;; Keep isearch-backward on Shift-Ctrl-r
+         ("C-r" . swiper)))
+(use-package avy
+  :bind (("C-:" . avy-goto-char)))
+ 
+
 ;; global set keys and set some variables outside of use-package's
+
+;; have math symbols print pretty
+(global-prettify-symbols-mode +1)
 
 ;;set eww as the default browser to open links in emacs
 ;;(I want to see if I can make this w3m)
 (setq browse-url-browser-function 'eww)
 
-;;enable avy goto stuff
-(global-set-key (kbd "M-;") 'avy-goto-char)
-(global-set-key (kbd "M-\"") 'avy-goto-char-2)
-
 ;;enable vterm toggle stuff
-(global-set-key (kbd "C-c v") 'vterm-toggle)
+(global-set-key (kbd "C-c v") 'multi-vterm-dedicated-toggle)
+(global-set-key (kbd "C-c t") 'multi-vterm)
 
 ;; bind M-n and M-p to paragraph moveme
 (global-set-key (kbd "M-p") #'backward-paragraph)
@@ -320,9 +350,6 @@
 
 ;;change yes/no to y/nx
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;;make swiper default "find in page" thing
-(global-set-key "\C-s" 'swiper)
 
 ;;lol dont worry about it
 ;;(setq gamegrid-glyph-height-mm 2.5)
@@ -347,11 +374,13 @@
 			("message" message)
 			("vterm-clear-scrollback" vterm-clear-scrollback)))
 
+(setq inferior-lisp-program "sbcl")
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 (setq initial-major-mode 'fundamental-mode)
 (setq shift-select-mode nil)
 (setq-default cursor-type 'box) 
+
 
 (add-hook 'prog-mode-hook  #'display-line-numbers-mode)
 
