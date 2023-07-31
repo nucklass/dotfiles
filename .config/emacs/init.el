@@ -99,7 +99,7 @@
   :config (ace-popup-menu-mode 1))
 
 (use-package vterm
-  :config (setq vterm-shell "nu"))
+  :config (setq vterm-shell "zsh"))
 
 
 (use-package dirvish
@@ -140,9 +140,10 @@
     )
 
 (use-package cobol-mode
-  :defer t
+  ;;:defer t
   :config
-  (setq cobol-source-format 'free)
+  (setq cobol-source-format 'fixed)
+  ;;(setq cobol-tab-width 3)
  )
 
 (use-package go-translate
@@ -184,9 +185,10 @@
   :defer t
   :config (setq cursor-type 'bar))
 
-(use-package julia-snail
+(use-package julia-repl
   :ensure t
-  :hook (julia-mode . julia-snail-mode))
+  :config (julia-repl-set-terminal-backend 'vterm)
+  :hook (julia-mode . julia-repl-mode))
 
 ;; (use-package julia-vterm
 ;;   :defer t
